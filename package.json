@@ -8,13 +8,16 @@
   },
   "bugs": "https://github.com/sahithyandev/honey-tree/issues",
   "dependencies": {
+    "@heroku-cli/plugin-git": "^7.43.0",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
+    "fs-extra": "^9.0.1",
     "tslib": "^1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
+    "@types/fs-extra": "^9.0.5",
     "@types/node": "^10",
     "eslint": "^5.13",
     "eslint-config-oclif": "^3.1",

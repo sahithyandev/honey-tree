@@ -1,13 +1,23 @@
 {
   "plugins": ["prettier"],
   "extends": ["oclif", "oclif-typescript"],
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+
   "rules": {
-    // "prettier/prettier": "warn",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "unicorn/filename-case": "camelCase",
     "semi": ["error", "always"],
     "quotes": ["error", "double"],
     "arrow-parens": "error",
     "object-curly-spacing": "off",
     "no-console": "off",
-    "indent": "off"
+    "indent": "off",
+    "valid-jsdoc": "off"
   }
 }
