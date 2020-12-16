@@ -1,9 +1,13 @@
 {
-  "extends": [
-    "oclif",
-    "oclif-typescript"
-  ],
+  "plugins": ["prettier"],
+  "extends": ["oclif", "oclif-typescript"],
   "rules": {
-    "quotes": ["double"]
+    // "prettier/prettier": "warn",
+    "semi": ["error", "always"],
+    "quotes": ["error", "double"],
+    "arrow-parens": "error",
+    "object-curly-spacing": "off",
+    "no-console": "off",
+    "indent": "off"
   }
 }
