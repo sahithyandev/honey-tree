@@ -7,9 +7,16 @@ A tool to create, share &amp; use project boilerplate code without any headaches
 <!-- [![Version](https://img.shields.io/npm/v/honey-tree.svg)](https://npmjs.org/package/honey-tree)
 [![License](https://img.shields.io/npm/l/honey-tree.svg)](https://github.com/sahithyandev/honey-tree/blob/master/package.json) -->
 
-| :exclamation: Important                                                                     |
-| ------------------------------------------------------------------------------------------- |
-| Honey Tree is not usable yet. I am working on it everyday to make it usable. If you are looking forward to try Honey Tree, give it a star. It will give me some motivation. |
+| :exclamation: Important                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Honey Tree is still on the development phase** |
+
+If you are looking forward to try Honey Tree, give it a star. It will give me some motivation.
+
+If you have any suggestions or ideas about anything that's useful for this project, open up a discussion. I love to chat.
+## Development
+
+Read the [Development guide](./DEVELOPMENT_GUIDE.md) to get started.
 
 <!-- usage_dis -->
 
