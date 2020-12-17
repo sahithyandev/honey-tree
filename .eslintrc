@@ -18,6 +18,8 @@
     "object-curly-spacing": "off",
     "no-console": "off",
     "indent": "off",
-    "valid-jsdoc": "off"
+    "no-warning-comments": "off",
+    "valid-jsdoc": "off",
+    "prefer-promise-reject-errors": "warn"
   }
 }

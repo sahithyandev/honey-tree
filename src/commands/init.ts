@@ -1,5 +1,7 @@
 import { CommandMetaInfo, ExtendedCommand } from "../types";
 import { Git } from "../git";
+import { StrObject } from "./../types";
+import { cli } from "cli-ux";
 
 export class Init extends ExtendedCommand {
   static meta: CommandMetaInfo = {
@@ -26,6 +28,16 @@ export class Init extends ExtendedCommand {
 
   git = new Git();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async doValidation({ projectDir, templateUrl }: StrObject<string>) {
+    // TODO try to include many checks in one try-catch
+    try {
+      await this.git.isAGitRepo(templateUrl);
+    } catch (error) {
+      cli.error(error);
+    }
+  }
+
   async run() {
     const { args } = this.parse(Init);
 
@@ -36,26 +48,16 @@ export class Init extends ExtendedCommand {
     const templateUrl = args["template-url"];
     const projectDir = args["project-dir"];
 
+    this.doValidation({ projectDir, templateUrl });
+
     this.log(`Initiating project @ ${projectDir} using ${templateUrl}`);
 
-    try {
-      await this.git.isAGitRepo(templateUrl);
-    } catch (error) {
-      console.error(`${templateUrl} is not a git repository\n`, error);
-      return;
-    }
-
+    // do the work;
     try {
       await this.git.cloneRepo(templateUrl, projectDir);
-    } catch (error) {
-      console.error(`Cloning failed\n ${error}`);
-      return;
-    }
-
-    try {
       await this.git.resetGitRepository(projectDir);
     } catch (error) {
-      console.error(`Error occured\n ${error}`);
+      cli.error(error);
     }
   }
 }

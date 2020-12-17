@@ -1,5 +1,9 @@
 import { Command } from "@oclif/command";
 
+export interface StrObject<Q> {
+  [key: string]: Q;
+}
+
 export interface CommandMetaInfo {
   commandName: string;
 }

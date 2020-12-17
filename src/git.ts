@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import * as fsExtra from "fs-extra";
 import { execFile } from "child_process";
 import { cleanArr } from "./utilityFunctions";
 
@@ -18,7 +18,8 @@ export class Git {
     return new Promise((resolve, reject) => {
       execFile("git", _args, (error, stdout, stderr) => {
         if (error) {
-          reject(stderr);
+          // eslint-disable-next-line prefer-promise-reject-errors
+          reject([`git ${commandName} failed`, stderr].join("\n"));
         }
         resolve(stdout || stderr);
       });
@@ -26,7 +27,6 @@ export class Git {
   }
 
   initGitRepo(directoryPath = "."): Promise<string> {
-    console.log(directoryPath);
     return new Promise((resolve, reject) => {
       this.runCommand("init", { args: [directoryPath] })
         .then(msg => {
@@ -39,17 +39,15 @@ export class Git {
 
   isAGitRepo(directoryPath = "."): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.runCommand("rev-parse", {
-        args: ["-C", directoryPath],
-      })
-        .then(() => {
-          resolve(true);
-        })
-        .catch((error: string) => {
-          if (error.includes("not a git repo")) {
-            resolve(false);
-          } else reject(error);
-        });
+      fsExtra.stat(`${directoryPath}/.git`, err => {
+        if (err === null) resolve(true);
+
+        if (err && err.code === "ENOENT") {
+          reject(`${directoryPath} is not a git repository`);
+        } else {
+          reject(err);
+        }
+      });
     });
   }
 
