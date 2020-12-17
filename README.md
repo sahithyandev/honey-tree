@@ -1,6 +1,6 @@
 # Honey-tree
 
-A tool to create &amp; use project templates
+A tool to create, share &amp; use project boilerplate code without any headaches.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 
@@ -11,24 +11,10 @@ A tool to create &amp; use project templates
 
 # Usage
 
-<!-- usage -->
+<!-- usage_dis -->
 
-```sh-session
-$ npm install -g honey-tree
-$ honey-tree COMMAND
-running command...
-$ honey-tree (-v|--version|version)
-honey-tree/0.0.1 linux-x64 node-v14.15.1
-$ honey-tree --help [COMMAND]
-USAGE
-  $ honey-tree COMMAND
-...
-```
-
-<!-- usagestop -->
-
-<!-- toc -->
-<!-- tocstop -->
+<!-- toc_dis -->
+<!-- tocstop_dis -->
 
 <!-- usage_dis -->
 
