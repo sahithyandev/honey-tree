@@ -1,6 +1,5 @@
 import { CommandMetaInfo, ExtendedCommand } from "../types";
 import { Git } from "../git";
-import { StrObject } from "./../types";
 import { cli } from "cli-ux";
 
 export class Init extends ExtendedCommand {
@@ -28,16 +27,6 @@ export class Init extends ExtendedCommand {
 
   git = new Git();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async doValidation({ projectDir, templateUrl }: StrObject<string>) {
-    // TODO try to include many checks in one try-catch
-    try {
-      await this.git.isAGitRepo(templateUrl);
-    } catch (error) {
-      cli.error(error);
-    }
-  }
-
   async run() {
     const { args } = this.parse(Init);
 
@@ -47,8 +36,6 @@ export class Init extends ExtendedCommand {
 
     const templateUrl = args["template-url"];
     const projectDir = args["project-dir"];
-
-    this.doValidation({ projectDir, templateUrl });
 
     this.log(`Initiating project @ ${projectDir} using ${templateUrl}`);
 

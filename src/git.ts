@@ -72,10 +72,8 @@ export class Git {
   resetGitRepository(directoryPath = "."): Promise<string> {
     return new Promise((resolve, reject) => {
       // delete directoryPath/.git
-
       try {
-        // @ts-ignore
-        fs.rmdirSync(`${directoryPath}/.git`, { recursive: true });
+        fsExtra.removeSync(`${directoryPath}/.git`);
       } catch (error) {
         reject(error);
       }
