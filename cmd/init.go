@@ -1,3 +1,5 @@
+package cmd
+
 /*
 Copyright © 2020 Sahithyan sahithyan2701@gmail.com
 
@@ -13,10 +15,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -27,9 +29,21 @@ var initCmd = &cobra.Command{
 	Short: "Initializes a project from a honey-tree-boilerplate",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command.`,
+	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("init called")
+		var boilerplateDirectory = args[0]
+		var output = isGitRepo(boilerplateDirectory)
+		fmt.Println(output)
 	},
+}
+
+func isGitRepo(directory string) bool {
+	var _, err = os.Stat(directory + "/.git")
+	
+	if os.IsNotExist(err) {
+		return false	
+	}
+	return true
 }
 
 func init() {
