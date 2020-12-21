@@ -17,9 +17,7 @@ limitations under the License.
 */
 
 import (
-	"fmt"
-	"os"
-
+	"github.com/sahithyandev/honey-tree/gitmanager"
 	"github.com/spf13/cobra"
 )
 
@@ -31,20 +29,15 @@ var initCmd = &cobra.Command{
 and usage of using your command.`,
 	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		var boilerplateDirectory = args[0]
-		var output = isGitRepo(boilerplateDirectory)
-		fmt.Println(output)
+		var boilerplateDirectory, targetLocation = args[0], args[1]
+		
+		if gitmanager.IsGitRepo(boilerplateDirectory) {
+			// gitmanager.CloneRepo(boilerplateDirectory, targetLocation)	
+			gitmanager.ResetGitRepo(targetLocation)
+		}
 	},
 }
 
-func isGitRepo(directory string) bool {
-	var _, err = os.Stat(directory + "/.git")
-	
-	if os.IsNotExist(err) {
-		return false	
-	}
-	return true
-}
 
 func init() {
 	rootCmd.AddCommand(initCmd)
