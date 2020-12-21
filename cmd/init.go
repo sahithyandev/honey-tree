@@ -10,7 +10,7 @@ import (
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
-	Use:   "init",
+	Use:   "init BOILERPLATE_GIT_REPO TARGET_DIR",
 	Short: "Initializes a project from a honey-tree-boilerplate",
 	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -21,10 +21,8 @@ var initCmd = &cobra.Command{
 			os.Exit(2)
 		}
 		
-		if gitmanager.IsGitRepo(boilerplateDirectory) {
-			gitmanager.CloneRepo(boilerplateDirectory, targetLocation)	
-			gitmanager.ResetGitRepo(targetLocation)
-		}
+		gitmanager.CloneRepo(boilerplateDirectory, targetLocation)	
+		gitmanager.ResetGitRepo(targetLocation)
 	},
 }
 
@@ -44,5 +42,6 @@ func isFolderExists(directory string) bool {
 }
 
 func init() {
+	
 	rootCmd.AddCommand(initCmd)
 }
