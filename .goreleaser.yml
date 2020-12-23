@@ -36,9 +36,10 @@ env_files:
   github_token: ./github_token
 
 brews:
-  - caveats: "The only boilerplate project manager you ever need"
+  - folder: Formula
+    caveats: "The only boilerplate project manager you ever need"
     tap:
       owner: sahithyandev
-      name: honey-tree-tap
+      name: honey-tree
     dependencies:
       - name: git
