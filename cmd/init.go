@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/sahithyandev/honey-tree/helpers"
 	"github.com/sahithyandev/honey-tree/helpers/gitmanager"
 	"github.com/spf13/cobra"
 )
@@ -16,7 +17,7 @@ var initCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var boilerplateDirectory, targetLocation = args[0], args[1]
 
-		if isFolderExists(targetLocation) {
+		if helpers.IsFolderExists(targetLocation) {
 			fmt.Println(targetLocation, "already exists")
 			os.Exit(2)
 		}
@@ -26,21 +27,6 @@ var initCmd = &cobra.Command{
 
 		fmt.Printf("New project created at %v", targetLocation)
 	},
-}
-
-func isFolderExists(directory string) bool {
-	var output, err = os.Stat(directory)
-
-	if os.IsNotExist(err) {
-		return false
-	} else if err == nil {
-		return true
-	}
-
-	fmt.Println(output)
-	fmt.Println(err)
-	os.Exit(2)
-	return false
 }
 
 func init() {
