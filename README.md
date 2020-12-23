@@ -9,11 +9,12 @@ If you want to test it now, feel free to clone it and build it yourself.
 
 After installing Honey Tree, `honey-tree` command will be available for you.
 
+
 ```bash
-$ honey-tree init <boilerplate_project_link> <project_dir>
+$ honey-tree init boilerplate_project_link project_dir
 ```
 
-Note that **`<boilerplate_project_link>` must be a git repository** and **<project_dir> must not exist.**
+Note that **`boilerplate_project_link` must be a git repository** and **`project_dir` must not exist.**
 
 
 <div align="center" style="text-align:center">

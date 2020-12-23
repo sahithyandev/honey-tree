@@ -47,6 +47,6 @@ func ResetGitRepo(directory string) string {
 		fmt.Println(fmt.Errorf("%v", err).Error())
 		os.Exit(1)
 	}
-	
+
 	return InitGitRepo(directory)
 }
