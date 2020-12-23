@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/sahithyandev/honey-tree/gitmanager"
+	"github.com/sahithyandev/honey-tree/helpers/gitmanager"
 	"github.com/spf13/cobra"
 )
 
