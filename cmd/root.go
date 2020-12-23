@@ -12,7 +12,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "honey-tree",
 	Short: "Honey Tree, is the only boilerplate project manager you ever need.",
-	Long: `Honey Tree is a boilerplate manager. It helps you to create and use boilerplate projects with ease.`,
+	Long:  `Honey Tree is a boilerplate manager. It helps you to create and use boilerplate projects with ease.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

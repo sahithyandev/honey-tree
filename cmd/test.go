@@ -24,21 +24,21 @@ var testCmd = &cobra.Command{
 		if len(args) > 0 {
 			projectDir = args[0]
 		}
-    fmt.Printf("Checking %v ...\n", projectDir)
+		fmt.Printf("Checking %v ...\n", projectDir)
 
-    // check if the projectDir exists
-    if !helpers.DoesExist(projectDir) {
-      fmt.Printf("%v directory not found\n", projectDir)
-      os.Exit(2)
-    }
+		// check if the projectDir exists
+		if !helpers.DoesExist(projectDir) {
+			fmt.Printf("%v directory not found\n", projectDir)
+			os.Exit(2)
+		}
 
-    // check if it is a git repo
-    if !gitmanager.IsGitRepo(projectDir) {
-      fmt.Printf("%v must be a git repository\n", projectDir)
-      os.Exit(2)
-    }
+		// check if it is a git repo
+		if !gitmanager.IsGitRepo(projectDir) {
+			fmt.Printf("%v must be a git repository\n", projectDir)
+			os.Exit(2)
+		}
 
-    // check configFile
+		// check configFile
 		var configFileError = testConfigFile(projectDir)
 		if configFileError != nil {
 			fmt.Println(configFileError)
