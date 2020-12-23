@@ -17,7 +17,7 @@ var initCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var boilerplateDirectory, targetLocation = args[0], args[1]
 
-		if helpers.IsFolderExists(targetLocation) {
+		if helpers.DoesExist(targetLocation) {
 			fmt.Println(targetLocation, "already exists")
 			os.Exit(2)
 		}

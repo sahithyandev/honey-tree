@@ -5,9 +5,9 @@ import (
 	"os"
 )
 
-// IsFolderExists checks if a folder exists
-func IsFolderExists(directory string) bool {
-	var output, err = os.Stat(directory)
+// DoesExist checks if a folder exists
+func DoesExist(path string) bool {
+	var output, err = os.Stat(path)
 
 	if os.IsNotExist(err) {
 		return false
