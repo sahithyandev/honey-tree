@@ -8,6 +8,7 @@ import (
 	"path"
 
 	"github.com/sahithyandev/honey-tree/helpers"
+	"github.com/sahithyandev/honey-tree/helpers/gitmanager"
 	"gopkg.in/validator.v2"
 
 	"github.com/spf13/cobra"
@@ -23,8 +24,21 @@ var testCmd = &cobra.Command{
 		if len(args) > 0 {
 			projectDir = args[0]
 		}
-		fmt.Printf("Checking %v...\n", projectDir)
+    fmt.Printf("Checking %v ...\n", projectDir)
 
+    // check if the projectDir exists
+    if !helpers.DoesExist(projectDir) {
+      fmt.Printf("%v directory not found\n", projectDir)
+      os.Exit(2)
+    }
+
+    // check if it is a git repo
+    if !gitmanager.IsGitRepo(projectDir) {
+      fmt.Printf("%v must be a git repository\n", projectDir)
+      os.Exit(2)
+    }
+
+    // check configFile
 		var configFileError = testConfigFile(projectDir)
 		if configFileError != nil {
 			fmt.Println(configFileError)
@@ -41,24 +55,28 @@ type configFormat struct {
 	Language    string
 }
 
-func readConfigFile(configFilePath string) configFormat {
-	data, err := ioutil.ReadFile(configFilePath)
+// using named returns
+// be careful
+func readConfigFile(configFilePath string) (config configFormat, err error) {
+	config = configFormat{}
+	var fileData []byte
+
+	fileData, err = ioutil.ReadFile(configFilePath)
 	if err != nil {
-		fmt.Print(err)
+		return
 	}
 
-	var config configFormat
-
-	err = json.Unmarshal(data, &config)
+	err = json.Unmarshal(fileData, &config)
 	if err != nil {
-		fmt.Println("error:", err)
+		return
 	}
 
-	var validationErr = validator.Validate(config)
-	if validationErr != nil {
-		fmt.Println("ValidationError", validationErr)
+	err = validator.Validate(config)
+	if err != nil {
+		return
 	}
-	return config
+
+	return
 }
 
 func testConfigFile(projectDir string) error {
@@ -70,10 +88,16 @@ func testConfigFile(projectDir string) error {
 		return fmt.Errorf("config file (%v) not found", configFilePath)
 	}
 
-	// TODO Check the config file format
-	// var config = readConfigFile(configFilePath)
+	var config, err = readConfigFile(configFilePath)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(2)
+	}
+	fmt.Println(config)
 
-	// TODO Validate the json
+	// check if
+
+	validator.Validate(config)
 
 	return nil
 }
