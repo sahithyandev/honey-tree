@@ -1,9 +1,6 @@
 # Honey Tree
 
 A tool to create, share & use project boilerplate code without any headaches.   
-**It will get released soon. If you are looking forward to use it, star it for now.**
-
-If you want to test it now, feel free to clone it and build it yourself.
 
 ## Usage
 

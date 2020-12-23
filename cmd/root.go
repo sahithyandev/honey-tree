@@ -11,7 +11,7 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:     "honey-tree",
-	Short:   "Honey Tree, is the only boilerplate project manager you ever need.",
+	Short:   "Honey Tree, The only boilerplate project manager you ever need.",
 	Long:    `Honey Tree is a boilerplate manager. It helps you to create and use boilerplate projects with ease.`,
 	Version: "0.0.1",
 }
