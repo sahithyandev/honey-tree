@@ -13,10 +13,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const (
-	_HONEY_TREE_CACHE_DIR = ".honey-tree"
-)
-
 var (
 	saveLocally bool
 )
@@ -41,7 +37,7 @@ var initCmd = &cobra.Command{
 		}
 
 		var repoName = getRepoName(boilerplateDirectory)
-		var cacheLocation = path.Join(HOME_DIR, _HONEY_TREE_CACHE_DIR, repoName)
+		var cacheLocation = path.Join(HOME_DIR, HoneyTreeCacheDir, repoName)
 
 		if saveLocally {
 			// TODO safely ignore "saveLocally" flag if boilerplateDirectory is local.

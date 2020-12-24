@@ -8,6 +8,13 @@ import (
 	// homedir "github.com/mitchellh/go-homedir"
 )
 
+const (
+	// HoneyTreeConfigFileName defines the name of the config file
+	HoneyTreeConfigFileName = "honey-tree.config.json"
+	// HoneyTreeCacheDir defines the location where boilerplates are cached locally
+	HoneyTreeCacheDir = ".honey-tree"
+)
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:     "honey-tree",
