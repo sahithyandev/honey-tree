@@ -9,11 +9,18 @@ import (
 )
 
 const (
-	// HoneyTreeConfigFileName defines the name of the config file
-	HoneyTreeConfigFileName = "honey-tree.config.json"
-	// HoneyTreeCacheDir defines the location where boilerplates are cached locally
+	// HoneyTreeConfigFileName : name of the config file
+	HoneyTreeConfigFileName = "honey-tree.config"
+	// HoneyTreeConfigFileType : format of the config file
+	HoneyTreeConfigFileType = "json"
+	// HoneyTreeCacheDir : location where boilerplates are cached locally
 	HoneyTreeCacheDir = ".honey-tree"
 )
+
+// HoneyTreeConfigFile merges name and type of the config file into one string
+func HoneyTreeConfigFile() string {
+	return HoneyTreeConfigFileName + "." + HoneyTreeConfigFileType
+}
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{

@@ -1,17 +1,14 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
-	"path"
 
 	"github.com/sahithyandev/honey-tree/helpers"
 	"github.com/sahithyandev/honey-tree/helpers/gitmanager"
-	"gopkg.in/validator.v2"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // testCmd represents the test command
@@ -20,7 +17,7 @@ var testCmd = &cobra.Command{
 	Short: "Run inside a directory to check if it is a honey-tree-boilerplate",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		var projectDir = ""
+		var projectDir = "."
 		if len(args) > 0 {
 			projectDir = args[0]
 		}
@@ -38,68 +35,28 @@ var testCmd = &cobra.Command{
 			os.Exit(2)
 		}
 
-		// check configFile
-		var configFileError = testConfigFile(projectDir)
-		if configFileError != nil {
-			fmt.Println(configFileError)
-			os.Exit(2)
-		}
+		readConfig(projectDir)
 
 		fmt.Printf("%v is a honey-tree-boilerplate.\n", projectDir)
 	},
 }
 
-type configFormat struct {
-	Name        string `validate:"nonzero,nonnil"`
-	Description string
-	Language    string
-}
+func readConfig(projectDir string) {
+	viper.SetConfigName(HoneyTreeConfigFileName)
+	viper.SetConfigType(HoneyTreeConfigFileType)
 
-// using named returns
-// be careful
-func readConfigFile(configFilePath string) (config configFormat, err error) {
-	config = configFormat{}
-	var fileData []byte
+	viper.AddConfigPath(projectDir)
 
-	fileData, err = ioutil.ReadFile(configFilePath)
+	var err = viper.ReadInConfig()
 	if err != nil {
-		return
-	}
-
-	err = json.Unmarshal(fileData, &config)
-	if err != nil {
-		return
-	}
-
-	err = validator.Validate(config)
-	if err != nil {
-		return
-	}
-
-	return
-}
-
-func testConfigFile(projectDir string) error {
-	const configFileName = "honey-tree.config.json"
-	var configFilePath = path.Join(projectDir, configFileName)
-
-	// Check if it exists
-	if !helpers.DoesExist(configFilePath) {
-		return fmt.Errorf("config file (%v) not found", configFilePath)
-	}
-
-	var config, err = readConfigFile(configFilePath)
-	if err != nil {
-		fmt.Println(err)
+		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+			fmt.Println("No config file")
+		} else {
+			// Config file was found but another error was produced
+			fmt.Printf("Error occured while reading %v", HoneyTreeConfigFile())
+		}
 		os.Exit(2)
 	}
-	fmt.Println(config)
-
-	// check if
-
-	validator.Validate(config)
-
-	return nil
 }
 
 func init() {
